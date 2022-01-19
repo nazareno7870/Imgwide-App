@@ -1,0 +1,24 @@
+.navbar{
+    background-color: #840032;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative
+}
+
+.logo{
+    width: 140px;
+    margin: 5px;
+}
+
+.icon-menu{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+}
