@@ -1,0 +1,15 @@
+.gallery{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-item img{
+    border-radius: 10px;
+}
+.img-item{
+    text-align: center;
+
+}
