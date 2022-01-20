@@ -7,9 +7,32 @@
 }
 
 .img-item img{
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    border-bottom: 1px solid rgb(84, 25, 67)
 }
-.img-item{
-    text-align: center;
 
+.img-item{
+    border-radius: 10px;
+    text-align: center;
+    width: 98%;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 6px 1px rgb(102 102 102);
+}
+
+.tags-img{
+    min-height: 40px;
+    text-align: left;
+    padding: 6px;
+}
+.tags-img p{
+    display: inline;
+    cursor: pointer;
+}
+@media (min-width: 800px) {
+    .gallery{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
 }

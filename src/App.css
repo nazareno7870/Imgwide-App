@@ -1,6 +1,6 @@
 img{
   max-height: 80vh;
-  max-width: 97%;
+  max-width: 100%;
 
   margin: auto;
 }
@@ -10,4 +10,12 @@ img{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+p{
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 400;
+}
+
+.gallery{
+  min-height: 120vh;
 }
