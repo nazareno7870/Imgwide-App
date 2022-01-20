@@ -3,20 +3,21 @@ import Menu from '../Menu/Menu';
 import './NavBar.css'
 
 const NavBar = () => {
-    const [menu, setmenu] = useState(false);
+    const [showMenu, setshowMenu] = useState(false);
 
     return (
     <>
         <div className="navbar">
             <div className="logo">
-                <img src="./src/logo.svg" alt="Logo ImgWide" />
+                <a href="/"><img src="./src/logo.svg" alt="Logo ImgWide" /></a>
             </div>
-            <div className="icon-menu" onClick={()=>setmenu(!menu)}>
+            <div className="icon-menu" onClick={()=>setshowMenu(!showMenu)}>
                 <img src="./src/menu-icon.svg" alt="Menu ImgWide" />
             </div>
         </div>
-
-        {menu ? <Menu/> : <></>}
+        <Menu 
+        showMenu={showMenu}
+        />
     </>
 
     );

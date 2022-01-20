@@ -1,0 +1,37 @@
+.form-new-post{
+    width: 95%;
+    font-family: 'IBM Plex Serif', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form-new-post textarea{
+    width: 98%;
+    resize: none;
+    height: 40px;
+    outline: none;
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 800;
+    padding: 6px;
+}
+.form-new-post label, .form-new-post button{
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 800;
+    margin-top: 20px;
+    background-color: #af0c4a;
+    padding: 10px;
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid #760832;
+    box-shadow: 0px 2px 6px 2px #760832;
+}
+.form-new-post button{
+    padding: 10px 20px; 
+    background-color: #ba0d4f;
+
+}
+.form-new-post input{
+    visibility: hidden;
+}

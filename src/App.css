@@ -10,6 +10,7 @@ img{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 p{
   font-family: 'IBM Plex Serif', serif;
