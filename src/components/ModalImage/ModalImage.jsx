@@ -15,9 +15,9 @@ const ModalImage = ({setmodal,modal,setimage,image}) => {
 
     return (
         <div className="modal-image" onClick={handleModal}  style={{display:modal ? 'block':'none'}}>
+            <button onClick={handleModal}>X</button>
         
             <div className="img-container" style={{display:loaded ? 'block':'none'}}>
-            
             <img 
             src={image} 
             onLoad={()=>setloaded(true)}

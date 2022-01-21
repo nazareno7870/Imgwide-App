@@ -1,7 +1,11 @@
 import { useRef , useEffect} from 'react';
 import './Menu.css'
-const Menu = ({showMenu}) => {
+import { useNavigate } from "react-router-dom"
+
+const Menu = ({showMenu,setshowMenu}) => {
     const menu = useRef()
+    const navigate = useNavigate();
+
     useEffect(() => {
         if(showMenu){
             menu.current.style.top = '47px'
@@ -13,8 +17,8 @@ const Menu = ({showMenu}) => {
     return (
         <div ref={menu} className="menu">
             <ul>
-                <li>Login</li>
-                <li>Imagenes</li>
+                <li onClick={()=>{navigate('/gallery');setshowMenu(!menu)} }>Gallery</li>
+                <li onClick={()=>{navigate('/createpost');setshowMenu(!menu)}}>Create Post</li>
                 <li>Categorias</li>
                 <li>Tags</li>
             </ul>

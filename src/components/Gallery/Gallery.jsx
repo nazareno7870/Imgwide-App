@@ -4,7 +4,6 @@ import ModalImage from '../ModalImage/ModalImage';
 import debounce from 'lodash.debounce';
 import isNearScreen from '../isNearScreen/isNearScreen';
 import useGetAllImages from './../../services/useGetAllImages';
-import NavBar from './../NavBar/NavBar';
 
 const Gallery = () => {
     const [modal, setmodal] = useState(false);
@@ -13,6 +12,7 @@ const Gallery = () => {
     const showMore = useRef()
     const {images} = useGetAllImages({page})
     const {nextShow} = isNearScreen({ref:showMore})
+    console.log(images)
 
 
     const handleNextPage = useCallback(
@@ -44,9 +44,9 @@ const Gallery = () => {
                         return(     
 
                         <div className="img-item" key={img.id}>
-                            <img src={img.image} alt="Libertadores de America" onClick={handleImage}/>
+                            <img src={'./imgs/posts/'+img.imgSrc} alt="Libertadores de America" onClick={handleImage}/>
                             <div className="tags-img">
-                                <p>{img.name}</p>
+                                {img.tags.map(tag=><p key={tag}>#{tag} </p>)}
                             </div>
                         </div>
                         )

@@ -1,8 +1,6 @@
 img{
   max-height: 80vh;
   max-width: 100%;
-
-  margin: auto;
 }
 
 .container{
@@ -12,11 +10,9 @@ img{
   align-items: center;
   position: relative;
 }
+
 p{
   font-family: 'IBM Plex Serif', serif;
   font-weight: 400;
 }
 
-.gallery{
-  min-height: 120vh;
-}

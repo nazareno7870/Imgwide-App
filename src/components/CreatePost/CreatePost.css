@@ -26,6 +26,7 @@
     color: white;
     border: 1px solid #760832;
     box-shadow: 0px 2px 6px 2px #760832;
+    cursor: pointer;
 }
 .form-new-post button{
     padding: 10px 20px; 
