@@ -1,9 +1,8 @@
 import { useEffect,useState } from "react";
 
-const useGetAllImages = ({page}) => {
+const useGetAllPostbyTag = ({page,TagRef}) => {
     const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
 
-    
     const [images, setimages] = useState([]);
     const limit = 10;
     const [error, setError] = useState(null);
@@ -11,7 +10,7 @@ const useGetAllImages = ({page}) => {
         const controller = new AbortController();
         const signal = controller.signal;
 
-        window.fetch(PATH+`/posts/limit=${limit}&skip=${limit*(page-1)}`,{
+        window.fetch(PATH+`/tags/tag/${TagRef}&limit=${limit}&skip=${limit*(page-1)}`,{
             signal: signal
         })
         .then(res => res.json())
@@ -25,9 +24,9 @@ const useGetAllImages = ({page}) => {
           });
         return () => controller.abort();
         
-    }, [page]);
+    }, [page,TagRef]);
 
-    return ({images});
+    return ({images,setimages});
 }
 
-export default useGetAllImages;
+export default useGetAllPostbyTag;

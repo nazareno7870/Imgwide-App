@@ -1,25 +1,26 @@
-import {useState} from 'react'
+import {useState,useContext, useEffect} from 'react'
 import axios from 'axios'
-import {useDispatch} from 'react-redux'
 import { useNavigate } from "react-router-dom"
+import './Login.css'
+import userContext from '../../context/userContext'
+
 
 const LoginForm = ()=>{
-const user = window.localStorage.getItem('username')
-const token = window.localStorage.getItem('token') 
-const dispatch = useDispatch()
 const [username, setusername] = useState('')
 const [password, setpassword] = useState('')
-const [error, seterror] = useState('')
+const [showError, setshowError] = useState(false)
+const {user, setuser} = useContext(userContext);
 const navigate = useNavigate()
 
-if(user && token){
-    axios.post('http://localhost:3001/login/exist',{
-        username:user,
-        token
-    }).then(res=>{
-        loginOk(res.data)
-    })
-  }
+useEffect(() => {
+    if(user.token){
+        navigate('/')
+    }
+}, [user]);
+
+
+
+ 
 
 const handleChangeUser = e =>{
   setusername(e.target.value)
@@ -29,55 +30,54 @@ const handleChangePassword = e=> {
   setpassword(e.target.value)
 }
 
-const showError = ()=>{
-    seterror('User or Password wrongs')
+const handleError = ()=>{
+    setshowError(true)
     setTimeout(() => {
-        seterror('') 
+        setshowError(false) 
     }, 4000);
 }
 
 const loginOk = user =>{
-    const inicializar = {
-        type:'INIT',
-        payload:user
-    }
+    setuser(user)
     setusername('')
     setpassword('')
     window.localStorage.setItem('token',user.token)
     window.localStorage.setItem('username',user.username)
-    dispatch(inicializar)
-    navigate('/feed')
-
+    navigate('/')
 }
 
 const submitLogin = async e=>{
     e.preventDefault()
-    const req = await axios.post('http://localhost:3001/login',{
-        username,
-        password
-    })
-    if(req.data.username){
-        loginOk(req.data)
-    }else{
-        showError()
+    try {
+        const req = await axios.post('http://localhost:3001/api/login',{
+            username,
+            password
+        })
+        if(req.data.username){
+            loginOk(req.data)
+        }
+    } catch (error) {
+        handleError()
     }}
+
 
     return (
     <>    
         <form className="login-form" onSubmit={submitLogin}>
             <h3>Login Form</h3>
             <div className="user-form">
+            <i className="fas fa-user"></i>
             <input type="text" placeholder="Username" onChange={handleChangeUser} value={username}></input>
             </div>
             <div className="user-form">
+            <i className="fas fa-key"></i>
             <input type="password" placeholder="Password" onChange={handleChangePassword} value={password}></input>
             </div>
             <button className="btn-grad">Login</button>
-            <p className="or">or</p>
+            <p className="or">If you don't have an account</p>
             <button className="btn-create-user" onClick={()=>navigate('/signup')}>Create User</button>
-            <img src='./imgs/logo.png' alt="Logo Social-app"></img>
-            <div className="error-login">
-            <p>{error}</p>
+            <div style={{opacity: showError ? '1':'0'}} className="error-login">
+            <p>User or Password wrongs</p>
             </div>
         </form>
 

@@ -7,7 +7,7 @@ const ModalImage = ({setmodal,modal,setimage,image}) => {
     const [loaded, setloaded] = useState(false);
 
     const handleModal =(e)=>{
-        if(e.target.className === 'img-container'){
+        if(e.target.className === 'img-container' || e.target.nodeName === 'BUTTON'){
             setimage('')
             setloaded(false)
             setmodal(!modal)}
@@ -15,13 +15,17 @@ const ModalImage = ({setmodal,modal,setimage,image}) => {
 
     return (
         <div className="modal-image" onClick={handleModal}  style={{display:modal ? 'block':'none'}}>
-            <button onClick={handleModal}>X</button>
         
-            <div className="img-container" style={{display:loaded ? 'block':'none'}}>
-            <img 
-            src={image} 
-            onLoad={()=>setloaded(true)}
-            />
+            <div className="img-container" style={{display:loaded ? 'flex':'none'}}>
+                <div className="img">
+                <button onClick={handleModal}>X</button>
+
+                    <img 
+                src={image} 
+                onLoad={()=>setloaded(true)}
+                />
+                </div>
+
 
             </div>
 

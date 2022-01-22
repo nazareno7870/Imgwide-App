@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react';
-const isNearScreen = ({ref,distance = '1000px'}) => {
+const isNearScreen = ({ref,distance = '500px'}) => {
 
     const [nextShow, setnextShow] = useState(false);
 

@@ -1,16 +1,17 @@
-import './Gallery.css'
+import './TagGallery.css'
 import { useState,useEffect, useCallback, useRef } from 'react';
 import ModalImage from '../ModalImage/ModalImage';
 import debounce from 'lodash.debounce';
 import isNearScreen from '../isNearScreen/isNearScreen';
-import useGetAllImages from './../../services/useGetAllImages';
 import Masonry from 'react-masonry-css'
+import useGetAllPostbyTag from './../../services/useGetAllPostbyTag';
 import { useNavigate } from "react-router-dom"
 
-const Gallery = () => {
-    
+
+const TagGallery = () => {
     const navigate = useNavigate();
 
+    const TagRef = window.location.pathname.slice(5)
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
@@ -22,7 +23,7 @@ const Gallery = () => {
     const [image, setimage] = useState('');
     const [page, setpage] = useState(1);
     const showMore = useRef()
-    const {images} = useGetAllImages({page})
+    const {images,setimages} = useGetAllPostbyTag({page,TagRef})
     const {nextShow} = isNearScreen({ref:showMore})
 
 
@@ -46,7 +47,8 @@ const Gallery = () => {
         return (<div className="img-item"  key={img.id}>
                             <img src={img.imgSrc} alt="Image" onClick={handleImage}/>
                             <div className="tags-img">
-                                {img.tags.map(tag=><p key={tag} onClick={()=>navigate(`/tag/${tag}`)}>#{tag} </p>)}
+                            {img.tags.map(tag=><p key={tag} onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/tag/${tag}`)}}>#{tag} </p>)}
+
                             </div>
                         </div>)
       });
@@ -75,4 +77,4 @@ const Gallery = () => {
     
 }
 
-export default Gallery;
+export default TagGallery;

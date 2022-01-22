@@ -1,0 +1,92 @@
+.login-form{
+    margin-top: 20px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 500px;
+    box-shadow: 1px 1px 4px #767475;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #68686852;
+}
+.login-form h3{
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    color: #af0c4a;
+    letter-spacing: 3px;
+    margin-bottom: -20px;
+}
+.login-form input{
+    width: 260px;
+    margin-top: 20px;
+    padding: 10px 44px;
+    outline: none;
+    border: 1px solid #bdb5b58c;
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 800;
+    color: #af0c4a;
+    text-align: start;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: inset 1px 1px 1px #100b0b1f;
+    transition: .5s;
+}
+.login-form input::placeholder{
+    color: #bbbbbb;
+    text-align: start;
+}
+
+.login-form input:focus{
+    border: 1px solid #af0c4a;
+}
+.user-form i{
+    position: absolute;
+    top: 28px;
+    left: 20px;
+    color: #9f1147;
+}
+.or{
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 16px;
+    color: #959595;
+    margin-bottom: -20px;
+}
+.user-form{
+    position: relative;
+}
+.btn-grad,.btn-create-user{
+    border: none;
+    background-color: rgb(175 12 74);
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 6px 50px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px #727272;
+    font-family: 'IBM Plex Serif', serif;
+    cursor: pointer;
+}
+
+.btn-create-user{
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    background-color: rgb(56 96 187);
+    margin-bottom: 10px;
+}
+.error-login{
+    color: red;
+    transition: .5s;
+    position: absolute;
+    top: 192px;
+}
+@media (min-width: 500px) {
+   .login-form{
+       max-width: 400px;
+   }
+}

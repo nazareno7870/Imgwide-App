@@ -17,10 +17,9 @@ const Menu = ({showMenu,setshowMenu}) => {
     return (
         <div ref={menu} className="menu">
             <ul>
-                <li onClick={()=>{navigate('/gallery');setshowMenu(!menu)} }>Gallery</li>
+                <li onClick={()=>{navigate('/gallery');setshowMenu(!menu)} }>Latest</li>
                 <li onClick={()=>{navigate('/createpost');setshowMenu(!menu)}}>Create Post</li>
-                <li>Categorias</li>
-                <li>Tags</li>
+                <li onClick={()=>{navigate('/tag');setshowMenu(!menu)}}>Tags</li>
             </ul>
         </div>
     );

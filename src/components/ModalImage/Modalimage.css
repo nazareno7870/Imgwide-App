@@ -17,17 +17,15 @@
     height: 100%;
     position: relative;
     text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
-  .img-container img{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.img{
     max-height: 90vh;
     max-width: 95%;
-    margin: auto;
+    position: relative;
   }
   
   .modal-image button{
@@ -40,8 +38,8 @@
     color: #ffffff;
     cursor: pointer;
     position: absolute;
-    top: 6%;
-    left: 0;
+    top: -32px;
     right: 0;
+    left: 0;
     margin: auto;
   }

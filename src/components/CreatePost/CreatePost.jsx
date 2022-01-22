@@ -2,56 +2,41 @@ import axios from 'axios';
 import { useState } from 'react';
 import './CreatePost.css';
 import Spinner from './../Spinner/Spinner';
-import Resizer from "react-image-file-resizer";
+import useGetAllTags from '../../services/useGetAllTags';
 
-const resizeFile = (file) =>
-  new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      700,
-      1250,
-      "WEBP",
-      95,
-      0,
-      (uri) => {
-        resolve(uri);
-      },
-      "file"
-    );
-  });
 
 const CreatPost = ()=>{
+
+    const [invalidImage, setinvalidImage] = useState(null);
+
+    const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
     const [selectedFile, setSelectedFile] = useState(null);
-    const [imgurl, setimgurl] = useState(null)
-    const [tags, setcontent] = useState("")
+    const [tagsBtn, settagsBtn] = useState([]);
+    useGetAllTags({settagsBtn})
+    const [tags, setTags] = useState([]);
     const [loading, setloading] = useState(false);
+    const [newtag, setnewTag] = useState('');
+    const [imgurl, setimgurl] = useState('')
+    const [linkImage, setlinkImage] = useState('');
 
     const handleReset =()=>{
-        setcontent('')
-        setimgurl(null)
-        setSelectedFile(null)
+        setTags([])
+        setimgurl('')
         setloading(false)
+        setSelectedFile(null)
+        setlinkImage('')
     }
     
-    const handleSubmit = async e=>{
-        
-        setloading(true)
-        e.preventDefault()
-        const file = selectedFile;
-        const image = await resizeFile(file);
-        const formData = new FormData()
-        formData.append("file",image)
-        formData.append("tags",tags)
-        formData.append("userId",'61e9c0bff06e4fa6550d2760')
-        formData.append("username",'Nazareno7870')
-        axios.post(import.meta.env.VITE_PATH+'/posts/createpost',formData).then(resp=>{
-            handleReset()
-        })
-
-
+    const handleTag=(e)=>{
+        const tag = e.target.innerHTML
+        if(tags.includes(tag)){
+            const newArray = tags.filter(t=>t !==tag)
+            setTags(newArray)
+        }else{
+            setTags(prevTags=>[...prevTags,tag])
         }
-
-
+    }
+    
     const handleChange = e=>{
         setSelectedFile(e.target.files[0])
         const reader = new FileReader();
@@ -61,18 +46,187 @@ const CreatPost = ()=>{
         }
     }
 
+    const handleMiddleware =(e)=>{
+        if(linkImage !== ''){
+            const obj = {
+
+                imgurl:linkImage,
+                tags,
+                userId:'61e9c0bff06e4fa6550d2760',
+                username:'Nazareno7870'
+            }
+    
+            axios.post(PATH+'/posts/createpost',obj).then(resp=>{
+                handleReset()
+            })
+
+        }else{
+            handleSubmit(e)
+        }
+    }
+
+
+
+    const handleSubmit = async e=>{
+        
+        setloading(true)
+        e.preventDefault()
+
+        let userInfo= {
+            file:[],
+            filepreview:null,
+        }
+
+        const imageFile = selectedFile;
+        const imageFilname = imageFile.name;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+
+//------------- Resize img code ----------------------------------
+             var canvas = document.createElement('canvas');
+             var ctx = canvas.getContext("2d");
+             ctx.drawImage(img, 0, 0);
+
+             var MAX_WIDTH = 900;
+             var MAX_HEIGHT = 900;
+             var width = img.width;
+             var height = img.height;
+
+             if (width > height) {
+               if (width > MAX_WIDTH) {
+                 height *= MAX_WIDTH / width;
+                 width = MAX_WIDTH;
+               }
+             } else {
+               if (height > MAX_HEIGHT) {
+                 width *= MAX_HEIGHT / height;
+                 height = MAX_HEIGHT;
+               }
+             }
+             canvas.width = width;
+             canvas.height = height;
+             var ctx = canvas.getContext("2d");
+             ctx.drawImage(img, 0, 0, width, height);
+             ctx.canvas.toBlob((blob) => {
+               const file = new File([blob], imageFilname, {
+                   type: 'image/jpeg',
+                   lastModified: Date.now()
+               });
+               userInfo = {
+                  ...userInfo,
+                  file:file,
+                  filepreview:URL.createObjectURL(imageFile),
+             }
+
+             let myHeaders = new Headers();
+             myHeaders.append("Authorization", "Bearer 187bab311cdf808bda2b57b827ef7dda0a27b4ae");
+             
+     
+             let formdata = new FormData();
+             formdata.append("image", userInfo.file);
+     
+             let requestOptions = {
+             mode:'cors',
+             method: 'POST',
+             headers: myHeaders,
+             body: formdata
+             };
+     
+             fetch("https://api.imgur.com/3/image", requestOptions)
+             .then(response => response.json())
+             .then(result => {
+     
+                 const link = result.data.link
+                 const path = link.slice(0,-4)
+     
+                 let extension = link.slice(-4)
+                 let imgurl= ''
+     
+                 if(link.slice(-4)==='webp'|| link.slice(-4)==='WEBP'|| link.slice(-4)==='jpeg'||link.slice(-4)==='JPEG'){
+                 extension = link.slice(-5)
+                 }else if(link.slice(-4)==='gif'||link.slice(-4)==='GIF'){
+                     imgurl = path+extension
+                 }else{
+                     imgurl = path+extension
+                 }
+                 
+     
+     
+                 const obj = {
+                     imgurl,
+                     tags,
+                     userId:'61e9c0bff06e4fa6550d2760',
+                     username:'Nazareno7870'
+                 }
+         
+                 axios.post(PATH+'/posts/createpost',obj).then(resp=>{
+                     handleReset()
+                 })
+         
+             })
+             .catch(error => console.log('error', error));
+     
+
+
+             }, 'image/jpeg', 1);
+           setinvalidImage(null)
+           };
+            img.onerror = () => {
+                  setinvalidImage('Invalid image content.');
+              return false;
+            };
+            //debugger
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(imageFile);
+
+
+        
+
+        }
+
+
+    const handleEnter=e=>{
+        if(e.key==='Enter'){
+            const arr = newtag.split(" ");
+            for (let i = 0; i < arr.length; i++) {
+                arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+            
+            }
+            const tagCap = arr.join(" ");
+            settagsBtn(prev=>[...prev,tagCap])
+            if(tags.includes(tagCap)){
+                const newArray = tags.filter(t=>t !==tagCap)
+                setTags(newArray)
+            }else{
+                setTags(prevTags=>[...prevTags,tagCap])
+            }
+            setnewTag('')
+        }
+    }
+
     return(
         <>
-            <form className="form-new-post" onSubmit={handleSubmit}>
-                <textarea placeholder="Type tags here" value={tags} onChange={(e) => setcontent(e.target.value)}></textarea>
-                {imgurl !== null ? <img className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
+            <div className="tags">
+                    {tagsBtn.map(tag=>{
+                        return(<button key={tag} onClick={handleTag} className={tags.includes(tag)?'active':''}>{tag}</button>)
+                    })}
+            </div>  
+            <input type="text" id="newTag" placeholder='New Tag' value={newtag} onKeyPress={handleEnter} onChange={e=>setnewTag(e.target.value)}/>
+
+            <form className="form-new-post" onSubmit={handleMiddleware}>
+
+                {imgurl !== '' ? <img className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
                 <label htmlFor="files" className="btn">Select Image</label>
                 <input
                 id="files"
-                type="file"
-                accept="image/jpg, image/jpeg"
-                onChange={handleChange}
-                />
+            type="file"
+            accept="image/jpg, image/jpeg, image/gif"
+            onChange={handleChange}
+            />
+            <input placeholder='Or write url' type="text" name="urlImage" id="urlImage" value={linkImage} onChange={e=>{setlinkImage(e.target.value);setimgurl(e.target.value)}}/>
                 <button className="btn-creatpost">Submit</button>
             </form>
 
