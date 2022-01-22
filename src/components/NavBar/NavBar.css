@@ -38,10 +38,40 @@ a{
     position: absolute;
     left: 20px;
    }
+   .menu-desk.login{
+       left: auto;
+       right: 10px;
+   }
+
+   .menu-desk.login li{
+    left: auto;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.344);
+    }
+    .menu-desk.login i{
+    margin-right: 10px;
+    }
+
    .menu-desk ul{
     display: flex;
     flex-direction: row;
    }
+   .username-top>p{
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1.5px;
+    padding: 6px 10px;
+    margin-right: 10px;
+   }
+   .username-top{
+    display: flex;
+    align-items: center;
+    color: white;
+    }
+    .username-top i{
+        font-size: 20px;
+        cursor: pointer;
+    }
 
    .menu-desk li{
     list-style: none;
@@ -51,7 +81,8 @@ a{
     font-weight: 800;
     color: white;
     letter-spacing: 1.5px;
-    background: rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.344);
+
     padding: 6px 10px;
     box-shadow: 0 2px 2px 0 rgba(73, 7, 77, 0.37);
     backdrop-filter: blur( 6.5px );

@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState,useContext} from 'react';
 import './CreatePost.css';
 import Spinner from './../Spinner/Spinner';
 import useGetAllTags from '../../services/useGetAllTags';
+import userContext from '../../context/userContext';
 
 
 const CreatPost = ()=>{
@@ -10,6 +11,7 @@ const CreatPost = ()=>{
     const [invalidImage, setinvalidImage] = useState(null);
 
     const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [tagsBtn, settagsBtn] = useState([]);
     useGetAllTags({settagsBtn})
@@ -18,6 +20,7 @@ const CreatPost = ()=>{
     const [newtag, setnewTag] = useState('');
     const [imgurl, setimgurl] = useState('')
     const [linkImage, setlinkImage] = useState('');
+    const {user} = useContext(userContext)
 
     const handleReset =()=>{
         setTags([])
@@ -47,13 +50,14 @@ const CreatPost = ()=>{
     }
 
     const handleMiddleware =(e)=>{
+        e.preventDefault()
         if(linkImage !== ''){
             const obj = {
 
                 imgurl:linkImage,
                 tags,
-                userId:'61e9c0bff06e4fa6550d2760',
-                username:'Nazareno7870'
+                userId:user.id,
+                username:user.username
             }
     
             axios.post(PATH+'/posts/createpost',obj).then(resp=>{
@@ -157,8 +161,8 @@ const CreatPost = ()=>{
                  const obj = {
                      imgurl,
                      tags,
-                     userId:'61e9c0bff06e4fa6550d2760',
-                     username:'Nazareno7870'
+                     userId:user.id,
+                     username:user.username
                  }
          
                  axios.post(PATH+'/posts/createpost',obj).then(resp=>{
@@ -219,14 +223,14 @@ const CreatPost = ()=>{
             <form className="form-new-post" onSubmit={handleMiddleware}>
 
                 {imgurl !== '' ? <img className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
-                <label htmlFor="files" className="btn">Select Image</label>
+            { user.grade === 'admin' && <><label htmlFor="files" className="btn">Select Image</label>
                 <input
                 id="files"
             type="file"
             accept="image/jpg, image/jpeg, image/gif"
             onChange={handleChange}
-            />
-            <input placeholder='Or write url' type="text" name="urlImage" id="urlImage" value={linkImage} onChange={e=>{setlinkImage(e.target.value);setimgurl(e.target.value)}}/>
+            /></>}
+            <input placeholder='Write url' type="text" name="urlImage" id="urlImage" value={linkImage} onChange={e=>{setlinkImage(e.target.value);setimgurl(e.target.value)}}/>
                 <button className="btn-creatpost">Submit</button>
             </form>
 
