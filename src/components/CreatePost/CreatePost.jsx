@@ -134,7 +134,7 @@ const CreatPost = ()=>{
              }
 
              let myHeaders = new Headers();
-             myHeaders.append("Authorization", "Bearer 187bab311cdf808bda2b57b827ef7dda0a27b4ae");
+             myHeaders.append("Authorization", import.meta.env.VITE_BEARER_IMGUR);
              
      
              let formdata = new FormData();

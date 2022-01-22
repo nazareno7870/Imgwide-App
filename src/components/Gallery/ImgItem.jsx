@@ -9,7 +9,7 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     const [loaded, setloaded] = useState(false);
     const [like, setlike] = useState(false)
     const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
-    const {user} = useContext(userContext)
+    const {user,setuser} = useContext(userContext)
     const [likes, setlikes] = useState(likesId.length);
 
 
@@ -31,6 +31,22 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
                 setlikes(prev=>prev+1)
             }
             setlike(!like)
+
+            let arrLikes = user.likes
+
+            const index = arrLikes.indexOf(id)
+
+            if(index>=0){
+                let arr1 = arrLikes.slice(0,index)
+                let arr2 = arrLikes.slice(index+1,)
+    
+                arrLikes = arr1.concat(arr2)
+            }else{
+                arrLikes.push(id)
+            }
+
+            setuser(prevUser=>({...prevUser,likes:arrLikes}))
+
             axios.post(PATH+'/like',{
                 userId:user.id,
                 postId:id
