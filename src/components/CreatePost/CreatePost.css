@@ -13,17 +13,19 @@ input{
     height: 33px;
     padding: 6px;
     outline: none;
-    border: 1px solid #680229;
-    font-family: 'IBM Plex Serif', serif;
+    border: none;
+    font-family: "IBM Plex Serif",serif;
     font-weight: 800;
-    background-color: #9043b7;
-    color: white;
-    box-shadow: inset 1px 1px 1px #100b0b85;
+    background-color: #ef8fb4;
+    color: #fff;
+    box-shadow: inset 1px 1px 2px #100b0b85;
+    text-align: center;
+    border-radius: 6px;
 }
 
 input::placeholder{
     font-family: 'IBM Plex Serif', serif;
-    color: rgba(255, 255, 255, 0.412);
+    color: rgba(255, 255, 255, 0.563);
 }
 
 .form-new-post textarea{
@@ -64,7 +66,7 @@ input::placeholder{
     text-transform: uppercase;
     padding: 6px 10px;
     cursor: pointer;
-    box-shadow: 0px 2px 3px black;
+    box-shadow: 0px 1px 2px black;
     transition: 0.5s;
 }
 

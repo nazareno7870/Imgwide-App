@@ -43,7 +43,9 @@
         border-radius: 10px;
         text-align: center;
         margin-bottom: 30px;
-        box-shadow: 0px 4px 6px 1px rgb(102 102 102);
+        box-shadow: 0px 0px 4px 1px rgb(102 102 102);
+        outline: 1px solid #af0c4a2e;
+        min-height: 200px;
     }
 
   div.img-item  > div.lds-roller{
