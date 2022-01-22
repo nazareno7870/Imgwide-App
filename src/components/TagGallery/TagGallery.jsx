@@ -6,6 +6,7 @@ import isNearScreen from '../isNearScreen/isNearScreen';
 import Masonry from 'react-masonry-css'
 import useGetAllPostbyTag from './../../services/useGetAllPostbyTag';
 import { useNavigate } from "react-router-dom"
+import ImgItem from '../Gallery/ImgItem';
 
 
 const TagGallery = () => {
@@ -44,13 +45,13 @@ const TagGallery = () => {
 
 
     const items = images.map(function(img) {
-        return (<div className="img-item"  key={img.id}>
-                            <img src={img.imgSrc} alt="Image" onClick={handleImage}/>
-                            <div className="tags-img">
-                            {img.tags.map(tag=><p key={tag} onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/tag/${tag}`)}}>#{tag} </p>)}
-
-                            </div>
-                        </div>)
+        return (<ImgItem
+        img={img}
+        handleImage={handleImage}
+        key={img.id}
+        setpage={setpage}
+        setimages={setimages}
+        />)
       });
 
     return (

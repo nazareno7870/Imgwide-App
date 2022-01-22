@@ -6,6 +6,7 @@ import isNearScreen from '../isNearScreen/isNearScreen';
 import useGetAllImages from './../../services/useGetAllImages';
 import Masonry from 'react-masonry-css'
 import { useNavigate } from "react-router-dom"
+import ImgItem from './ImgItem';
 
 const Gallery = () => {
     
@@ -22,7 +23,7 @@ const Gallery = () => {
     const [image, setimage] = useState('');
     const [page, setpage] = useState(1);
     const showMore = useRef()
-    const {images} = useGetAllImages({page})
+    const {images,setimages} = useGetAllImages({page})
     const {nextShow} = isNearScreen({ref:showMore})
 
 
@@ -43,12 +44,13 @@ const Gallery = () => {
 
 
     const items = images.map(function(img) {
-        return (<div className="img-item"  key={img.id}>
-                            <img src={img.imgSrc} alt="Image" onClick={handleImage}/>
-                            <div className="tags-img">
-                                {img.tags.map(tag=><p key={tag} onClick={()=>navigate(`/tag/${tag}`)}>#{tag} </p>)}
-                            </div>
-                        </div>)
+        return (<ImgItem
+        img={img}
+        handleImage={handleImage}
+        key={img.id}
+        setpage={setpage}
+        setimages={setimages}
+        />)
       });
 
     return (

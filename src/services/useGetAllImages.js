@@ -5,7 +5,7 @@ const useGetAllImages = ({page}) => {
 
     
     const [images, setimages] = useState([]);
-    const limit = 10;
+    const limit = 6;
     const [error, setError] = useState(null);
     useEffect(() => {
         const controller = new AbortController();
@@ -27,7 +27,7 @@ const useGetAllImages = ({page}) => {
         
     }, [page]);
 
-    return ({images});
+    return ({images,setimages});
 }
 
 export default useGetAllImages;

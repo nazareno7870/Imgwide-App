@@ -1,11 +1,12 @@
 import {useState} from 'react'
-import { faTimesCircle, faCheckCircle } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import './CreateUser.css'
 
 const CreatUser = ()=>{
+    const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
     const [username, setUsername] = useState('')
+
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [error, seterror] = useState([])
@@ -26,7 +27,7 @@ const CreatUser = ()=>{
     }
 
     const handleLogin = ()=>{
-        navigate('/')
+        navigate('/login')
     }
 
     const handleSubmit = e=>{
@@ -47,7 +48,7 @@ const CreatUser = ()=>{
         }, 3000);}
 
         if(errors.length===0){
-            axios.post('http://localhost:3001/users',{
+            axios.post(PATH+'/users/createuser',{
                 username,
                 name,
                 password
@@ -68,33 +69,35 @@ const CreatUser = ()=>{
             <div className="signup-form">
                 <div className="input-form">
                     <label>Username - Minimum 6 characters</label>
+                    <i className="fas fa-user"></i>
                     <input type="text" placeholder="Username" onChange={handleUsername} value={username}></input>
                 </div>
             {username.length < 6
-                ? <FontAwesomeIcon className="wrong" icon={faTimesCircle} />
-                : <FontAwesomeIcon className="check" icon={faCheckCircle} />}
+                ? <div className="wrong"><i class="fas fa-times-circle"></i></div>
+                : <div className="check"><i class="fas fa-check-circle"></i></div>}
             </div>
             <div className="signup-form">
                 <div className="input-form">
                     <label>Name - Minimum 4 characters</label>
+                    <i class="fas fa-user-tag"></i>
                     <input type="text" placeholder="Name" onChange={handleName} value={name}></input>
                 </div>
             {name.length < 4
-                ? <FontAwesomeIcon className="wrong" icon={faTimesCircle} />
-                : <FontAwesomeIcon className="check" icon={faCheckCircle} />}
+                ? <div className="wrong"><i class="fas fa-times-circle"></i></div>
+                : <div className="check"><i class="fas fa-check-circle"></i></div>}
             </div>
             <div className="signup-form">
                 <div className="input-form">
                     <label>Password - Minimum 8 characters</label>
+                    <i className="fas fa-key"></i>
                     <input type="password" placeholder="Password" onChange={handlePassword} value=      {password}></input>
                 </div>
             {password.length < 8
-                ? <FontAwesomeIcon className="wrong" icon={faTimesCircle} />
-                : <FontAwesomeIcon className="check" icon={faCheckCircle} />}    
+                ? <div className="wrong"><i class="fas fa-times-circle"></i></div>
+                : <div className="check"><i class="fas fa-check-circle"></i></div>}    
             </div>
             <button className="btn-grad btn-signup">Sign Up</button>
-            <p className="or" onClick={()=>navigate('/')} style={{cursor:'pointer',marginBottom:'10px'}}>Back to Login Form</p>
-            <img src='./imgs/logo.png' alt="Logo Social-app"></img>
+            <p className="or" onClick={()=>navigate('/login')} style={{cursor:'pointer',marginBottom:'10px'}}>Back to Login Form</p>
             <div className="modal-error" style={
                 showError === false
                 ? {visibility:'hidden',opacity:0}
@@ -109,9 +112,8 @@ const CreatUser = ()=>{
         return(
             <div className="login-form create-user">
                 <p>User created successfully</p>
-                <p>Welcome to Social-App</p>
+                <p>Welcome to ImgWide</p>
                 <button className="btn-grad btn-signup" onClick={handleLogin}>Go to Login</button>
-                <img id="img-succesuser" src='./imgs/logo.png' alt="Logo Social-app"></img>
             </div>
         )
     }

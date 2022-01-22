@@ -10,11 +10,11 @@ const NavBar = () => {
     const navigate = useNavigate();
     const {user,setuser} = useContext(userContext)
     useLogin()
-
     const handleLogout =()=>{
         window.localStorage.removeItem('username')
         window.localStorage.removeItem('token')
         setuser({})
+        navigate('/')
     }
 
 

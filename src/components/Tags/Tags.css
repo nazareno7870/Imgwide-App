@@ -1,0 +1,22 @@
+.tags-gallery button{
+    border: none;
+    color: white;
+    background-color: #14688f;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    cursor: pointer;
+    box-shadow: 0px 1px 3px black;
+    transition: 0.5s;
+    border-radius: 6px;
+}
+.tags-gallery button:nth-child(2n){
+    background-color: #af0c4a;
+}
+.tags-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}

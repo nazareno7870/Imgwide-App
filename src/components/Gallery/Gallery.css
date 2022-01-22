@@ -31,7 +31,7 @@
         margin-left: -30px; /* gutter size offset */
         width: 98%;
         margin-top: 20px;
-        min-height: 200vh;
+        min-height: 120vh;
       }
       .my-masonry-grid_column {
         padding-left: 30px; /* gutter size */
@@ -45,3 +45,10 @@
         margin-bottom: 30px;
         box-shadow: 0px 4px 6px 1px rgb(102 102 102);
     }
+
+  div.img-item  > div.lds-roller{
+    position: absolute;
+  }
+  div.img-item {
+    position: relative;
+  }

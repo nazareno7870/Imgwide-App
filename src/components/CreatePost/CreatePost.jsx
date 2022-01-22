@@ -4,6 +4,7 @@ import './CreatePost.css';
 import Spinner from './../Spinner/Spinner';
 import useGetAllTags from '../../services/useGetAllTags';
 import userContext from '../../context/userContext';
+import { useNavigate } from "react-router-dom"
 
 
 const CreatPost = ()=>{
@@ -11,7 +12,7 @@ const CreatPost = ()=>{
     const [invalidImage, setinvalidImage] = useState(null);
 
     const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
-
+    const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState(null);
     const [tagsBtn, settagsBtn] = useState([]);
     useGetAllTags({settagsBtn})
@@ -21,6 +22,8 @@ const CreatPost = ()=>{
     const [imgurl, setimgurl] = useState('')
     const [linkImage, setlinkImage] = useState('');
     const {user} = useContext(userContext)
+
+
 
     const handleReset =()=>{
         setTags([])

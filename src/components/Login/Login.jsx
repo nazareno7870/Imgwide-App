@@ -6,6 +6,8 @@ import userContext from '../../context/userContext'
 
 
 const LoginForm = ()=>{
+const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
+
 const [username, setusername] = useState('')
 const [password, setpassword] = useState('')
 const [showError, setshowError] = useState(false)
@@ -49,7 +51,7 @@ const loginOk = user =>{
 const submitLogin = async e=>{
     e.preventDefault()
     try {
-        const req = await axios.post('http://localhost:3001/api/login',{
+        const req = await axios.post(PATH+'/login',{
             username,
             password
         })

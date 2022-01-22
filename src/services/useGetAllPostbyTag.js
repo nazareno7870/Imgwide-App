@@ -4,7 +4,7 @@ const useGetAllPostbyTag = ({page,TagRef}) => {
     const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
 
     const [images, setimages] = useState([]);
-    const limit = 10;
+    const limit = 6;
     const [error, setError] = useState(null);
     useEffect(() => {
         const controller = new AbortController();

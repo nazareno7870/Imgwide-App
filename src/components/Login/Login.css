@@ -76,14 +76,14 @@
     font-size: 12px;
     padding: 6px 14px;
     border-radius: 4px;
-    background-color: rgb(56 96 187);
+    background-color: #14688f;
     margin-bottom: 10px;
 }
 .error-login{
     color: red;
     transition: .5s;
     position: absolute;
-    top: 192px;
+    top: 19px;
 }
 @media (min-width: 500px) {
    .login-form{
