@@ -50,6 +50,9 @@ const Gallery = () => {
         key={img.id}
         setpage={setpage}
         setimages={setimages}
+        likesId={img.likesId}
+        username={img.userId.username}
+        id={img.id}
         />)
       });
 

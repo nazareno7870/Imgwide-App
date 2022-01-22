@@ -46,11 +46,14 @@ const TagGallery = () => {
 
     const items = images.map(function(img) {
         return (<ImgItem
-        img={img}
-        handleImage={handleImage}
-        key={img.id}
-        setpage={setpage}
-        setimages={setimages}
+          img={img}
+          handleImage={handleImage}
+          key={img.id}
+          setpage={setpage}
+          setimages={setimages}
+          likesId={img.likesId}
+          username={img.userId.username}
+          id={img.id}
         />)
       });
 

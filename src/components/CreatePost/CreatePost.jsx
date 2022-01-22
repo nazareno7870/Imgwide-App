@@ -53,6 +53,12 @@ const CreatPost = ()=>{
     }
 
     const handleMiddleware =(e)=>{
+        let token = `Bearer ${user.token}`
+        const config = {
+            headers: {
+              Authorization: token
+            }}
+
         e.preventDefault()
         if(linkImage !== ''){
             const obj = {
@@ -63,7 +69,7 @@ const CreatPost = ()=>{
                 username:user.username
             }
     
-            axios.post(PATH+'/posts/createpost',obj).then(resp=>{
+            axios.post(PATH+'/posts/createpost',obj,config).then(resp=>{
                 handleReset()
             })
 
@@ -197,7 +203,8 @@ const CreatPost = ()=>{
 
     const handleEnter=e=>{
         if(e.key==='Enter'){
-            const arr = newtag.split(" ");
+            const lower = newtag.toLowerCase()
+            const arr = lower.split(" ");
             for (let i = 0; i < arr.length; i++) {
                 arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
             
