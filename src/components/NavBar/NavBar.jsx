@@ -54,7 +54,7 @@ const NavBar = () => {
                     </div>
 
                     {user.username
-                    ?<><div className="username-top"><p>{user.username}</p><i onClick={handleLogout} className="fas fa-door-open"></i></div></>
+                    ?<><div className="username-top"><p onClick={()=>navigate(`/profile/${user.username}`)}>{user.username}</p><i onClick={handleLogout} className="fas fa-door-open"></i></div></>
                     :<li onClick={()=>{navigate('/login')} }><i className="fas fa-user"></i>Login</li>}
                 </ul>
              </div>

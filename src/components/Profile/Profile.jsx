@@ -1,14 +1,19 @@
-import './Gallery.css'
 import { useState,useEffect, useCallback, useRef } from 'react';
 import ModalImage from '../ModalImage/ModalImage';
 import debounce from 'lodash.debounce';
 import isNearScreen from '../isNearScreen/isNearScreen';
-import useGetAllImages from './../../services/useGetAllImages';
 import Masonry from 'react-masonry-css'
-import ImgItem from './ImgItem';
+import ImgItem from '../Gallery/ImgItem';
+import useGetProfile from './../../services/useGetProfile';
+import useGetAllPostbyUsername from './../../services/useGetAllPostbyUsername';
+import './Profile.css'
+import { useNavigate } from "react-router-dom"
 
-const Gallery = () => {
-    
+const Profile = () => {
+    const navigate = useNavigate();
+
+    const username = window.location.pathname.slice(9)
+    const {profile}=useGetProfile({username})
 
     const breakpointColumnsObj = {
         default: 4,
@@ -21,9 +26,8 @@ const Gallery = () => {
     const [image, setimage] = useState('');
     const [page, setpage] = useState(1);
     const showMore = useRef()
-    const {images,setimages} = useGetAllImages({page})
+    const {images,setimages} = useGetAllPostbyUsername({page,username})
     const {nextShow} = isNearScreen({ref:showMore})
-
     const handleNextPage = useCallback(
         debounce(()=>{setpage(prevPag=> prevPag+1)}, 500)
       , []);
@@ -55,13 +59,36 @@ const Gallery = () => {
 
     return (
         <>
-            <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-            >
-            {items}
-            </Masonry>
+            {profile.username &&
+            <>
+              <div className="container-profile">
+
+              <div className="username">
+                <i class="fas fa-id-card"></i>
+                <p>{username}</p>
+              </div>
+
+              <div className="posts">
+                <i class="fas fa-camera-retro"></i>
+                <p>{profile.posts.length}</p>
+              </div>
+
+              </div>
+              </>} 
+
+              {!profile.username &&
+              <div className="wrong-user">
+                <p>Wrong Username</p>
+                <button onClick={()=>navigate('/')}>Go Home</button>
+              </div>
+              }
+              <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+              >
+              {items}
+              </Masonry>
                 <div id='observe'>
                             <p ref={showMore}>Whoops... That's it, dude.</p>
                 </div>
@@ -72,9 +99,11 @@ const Gallery = () => {
                 image={image}
                 setimage={setimage}
                 />
+      
+
     </>
     );
     
 }
 
-export default Gallery;
+export default Profile;

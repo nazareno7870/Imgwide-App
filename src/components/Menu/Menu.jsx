@@ -31,7 +31,7 @@ const Menu = ({showMenu,setshowMenu,handleLogout,searchInput,setSearchInput}) =>
 
     return (
         <div ref={menu} className="menu">
-            {user.username && <p>Hi, {user.username}</p>}
+            {user.username && <div className="btn-profile-menu"><p onClick={()=>{navigate(`/profile/${user.username}`);setshowMenu(!menu)}}>Hi, {user.username}</p></div>}
             <ul>
                 <li><div className="search">
                 <input onKeyPress={handleEnter} autoComplete="off" type="text" name="search" id="search" value={searchInput} onChange={e=>setSearchInput(e.target.value)} />

@@ -39,7 +39,10 @@
     border-radius: 0px 0px 10px 10px;
 
 }
-
+.btn-profile-menu{
+  width: 100%;
+  cursor: pointer;
+}
 @-webkit-keyframes color-change-2x {
     0% {
       background: #c74d7b;

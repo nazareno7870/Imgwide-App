@@ -1,0 +1,66 @@
+.container-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    padding: 20px 40px;
+    border: 1px solid #af0c4a;
+    box-shadow: 1px 1px 1px #0000004d;
+    border-radius: 0px 0px 16px 16px;
+}
+.container-profile>.username{
+    display: flex;
+    font-size: 30px;
+    color: #af0c4a;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.container-profile>.username p{
+    font-weight: 500;
+}
+
+.container-profile>.username i{
+    font-size: 20px;
+    padding: 6px 0px 0px 0px;
+}
+.container-profile>.posts{
+    display: flex;
+    font-size: 20px;
+    color: #af0c4a;
+    align-items: center;
+    gap: 10px;
+}
+.wrong-user{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    width: 90%;
+    gap: 40px;
+    border-radius: 16px;
+    padding: 16px;
+    align-items: center;
+}
+
+.wrong-user button{
+    border: none;
+    background-color: rgb(175 12 74);
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 6px 50px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px #727272;
+    font-family: 'IBM Plex Serif', serif;
+    cursor: pointer;
+}
+.wrong-user p{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 15px;
+    color: #af0c4a;
+    letter-spacing: 3px;
+}

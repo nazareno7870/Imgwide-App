@@ -4,6 +4,9 @@ import Spinner from './../Spinner/Spinner';
 import userContext from '../../context/userContext';
 import axios from 'axios';
 import './ImgItem.css'
+import {TwitterIcon,
+    TwitterShareButton,
+  } from "react-share";
 
 const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     const navigate = useNavigate();
@@ -92,7 +95,9 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
                         <i className="far fa-trash-alt"></i>
                     </div>}
                     <div className="stats-post">
-                            <p><i className="fas fa-user"></i>{username}</p>
+                        <div className="stat-user">
+                            <p onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/profile/${username}`)}}><i className="fas fa-user"></i>{username}</p>
+                        </div>
                             <div className="likes"><p>{likes}</p><p><i style={{opacity: like ? 1 : 0}} className="fas fa-heart"></i><i onClick={toggleLike} style={{opacity: !like ? 1 : 0}} className="far fa-heart"></i></p></div>
                         </div>
                     <div className="tags-img">

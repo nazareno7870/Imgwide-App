@@ -72,7 +72,9 @@ div.menu > ul > li > div.search > i{
     right: auto;
     left: 14%;
 }
-
+.username-top p{
+cursor: pointer;
+}
 
 @media (min-width: 768px) {
    .menu,.icon-menu{
