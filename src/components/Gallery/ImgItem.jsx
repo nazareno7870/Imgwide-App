@@ -36,7 +36,7 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
                 setlike(true)
             }
         }else{
-            setlikes(false)
+            setlike(false)
         }
     }, [user])
 
