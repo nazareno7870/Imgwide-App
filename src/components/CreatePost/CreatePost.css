@@ -95,3 +95,7 @@ input::placeholder{
 #urlImage{
     display: block;
 }
+.form-new-post p{
+    color: #ff0000;
+    font-weight: 800;
+}

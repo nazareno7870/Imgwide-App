@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState,useContext} from 'react';
+import { useState,useContext,useRef} from 'react';
 import './CreatePost.css';
 import Spinner from './../Spinner/Spinner';
 import useGetAllTags from '../../services/useGetAllTags';
@@ -22,8 +22,8 @@ const CreatPost = ()=>{
     const [imgurl, setimgurl] = useState('')
     const [linkImage, setlinkImage] = useState('');
     const {user} = useContext(userContext)
-
-
+    const img = useRef()
+    const [showError, setshowError] = useState(false);
 
     const handleReset =()=>{
         setTags([])
@@ -44,12 +44,14 @@ const CreatPost = ()=>{
     }
     
     const handleChange = e=>{
+
         setSelectedFile(e.target.files[0])
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0])
         reader.onloadend = e=>{
             setimgurl(reader.result)
         }
+ 
     }
 
     const handleMiddleware =(e)=>{
@@ -58,9 +60,10 @@ const CreatPost = ()=>{
             headers: {
               Authorization: token
             }}
+        
 
         e.preventDefault()
-        if(linkImage !== ''){
+        if(linkImage !== '' && img.current.height>45){
             const obj = {
 
                 imgurl:linkImage,
@@ -73,8 +76,14 @@ const CreatPost = ()=>{
                 handleReset()
             })
 
-        }else{
+        }else if(img.current.height>45){
             handleSubmit(e)
+        }else{
+            setimgurl('')
+            setshowError(true)
+            setTimeout(() => {
+                setshowError(false)
+            }, 5000);
         }
     }
 
@@ -236,7 +245,8 @@ const CreatPost = ()=>{
 
             <form className="form-new-post" onSubmit={handleMiddleware}>
 
-                {imgurl !== '' ? <img className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
+                {imgurl !== '' ? <img ref={img} className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
+                {showError ? <p>Enter a valid url, please.</p> : <></>}
             { user.grade === 'admin' && <><label htmlFor="files" className="btn">Select Image</label>
                 <input
                 id="files"
