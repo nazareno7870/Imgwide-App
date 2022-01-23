@@ -4,6 +4,8 @@ import './NavBar.css';
 import { useNavigate } from "react-router-dom"
 import useLogin from './../../services/useLogin';
 import userContext from '../../context/userContext';
+import logo from '../../../imgs/assets/logo.svg'
+import menu from '../../../imgs/assets/menu-icon.svg'
 
 const NavBar = () => {
     const [showMenu, setshowMenu] = useState(false);
@@ -22,7 +24,7 @@ const NavBar = () => {
     <>
         <div className="navbar">
             <div className="logo">
-                <a onClick={()=>navigate('/')}><img src="../imgs/assets/logo.svg" alt="Logo ImgWide" /></a>
+                <a onClick={()=>navigate('/')}><img src={logo} alt="Logo ImgWide" /></a>
             </div>
 
             <div className="menu-desk">
@@ -42,7 +44,7 @@ const NavBar = () => {
              </div>
 
             <div className="icon-menu" onClick={()=>setshowMenu(!showMenu)}>
-                <img src="../imgs/assets/menu-icon.svg" alt="Menu ImgWide" />
+                <img src={menu} alt="Menu ImgWide" />
             </div>
         </div>
 
