@@ -4,3 +4,32 @@
     align-items: center;
     justify-content: center;
 }
+.share{
+    margin-right: 20px;
+    font-size: 22px;
+    color: #af0c4a;
+}
+.share i{
+cursor: pointer;
+}
+.share-buttons{
+    position: absolute;
+    width: 70%;
+    background-color: white;
+    right: 0;
+    top: 3px;
+    height: 45px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 70;
+    transition: .7s;
+    border-radius: 12px 0 0 0;
+    box-shadow: -3px -3px 2px #00000038;
+}
+.bottom-image{
+    position: relative;
+    z-index: 80;
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;}

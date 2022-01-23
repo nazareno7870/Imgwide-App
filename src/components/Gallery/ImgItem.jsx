@@ -6,6 +6,16 @@ import axios from 'axios';
 import './ImgItem.css'
 import {TwitterIcon,
     TwitterShareButton,
+    TelegramShareButton,
+    TelegramIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+    RedditShareButton,
+    RedditIcon,
+    EmailShareButton,
+    EmailIcon,
+    FacebookShareButton,
+    FacebookIcon,
   } from "react-share";
 
 const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
@@ -17,8 +27,8 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     const [likes, setlikes] = useState(likesId.length);
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [deletePost, setdeletePost] = useState(false);
-
-
+    const [showShare, setshowShare] = useState(false);
+    const urlPost = window.location.origin + '/post/'+id
     useEffect(() => {
         if(user.username){
             if(user.likes.includes(id) && like === false){
@@ -26,6 +36,10 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
             }
         }
     }, [])
+
+    const handleShare = ()=>{
+        setshowShare(!showShare)
+    }
 
     const handleDeletePost = (e)=>{
         let token = `Bearer ${user.token}`
@@ -90,15 +104,30 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
                 onLoad={()=>setloaded(true)}
                 />
                 {!loaded?<Spinner />:<></>}
-                <div className="bottom-image">
-                    {username === user.username && <div className="delete-item" onClick={()=>setShowModalDelete(!showModalDelete)}>
+                {username === user.username && <div className="delete-item" onClick={()=>setShowModalDelete(!showModalDelete)}>
                         <i className="far fa-trash-alt"></i>
                     </div>}
+                <div className="bottom-image">
+                    <div className="share-buttons" style={{top: showShare ? '-49px': '5px'}}>
+                        <TwitterShareButton url={urlPost}><TwitterIcon size={26} round={true}/></TwitterShareButton>
+                        <WhatsappShareButton url={urlPost}><WhatsappIcon size={26} round={true}/></WhatsappShareButton>
+                        <TelegramShareButton url={urlPost}><TelegramIcon size={26} round={true}/></TelegramShareButton>
+                        <RedditShareButton url={urlPost}><RedditIcon size={26} round={true}/></RedditShareButton>
+                        <EmailShareButton url={urlPost}><EmailIcon size={26} round={true}/></EmailShareButton>
+                        <FacebookShareButton url={urlPost}><FacebookIcon size={26} round={true}/></FacebookShareButton>
+                    </div>
+
                     <div className="stats-post">
+
                         <div className="stat-user">
                             <p onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/profile/${username}`)}}><i className="fas fa-user"></i>{username}</p>
-                        </div>
-                            <div className="likes"><p>{likes}</p><p><i style={{opacity: like ? 1 : 0}} className="fas fa-heart"></i><i onClick={toggleLike} style={{opacity: !like ? 1 : 0}} className="far fa-heart"></i></p></div>
+                        </div>  
+
+                            <div className="likes">
+                            <div className="share">
+                                <i className="fab fa-telegram-plane" onClick={handleShare}></i>
+                            </div>
+                                <p>{likes}</p><p><i style={{opacity: like ? 1 : 0}} className="fas fa-heart"></i><i onClick={toggleLike} style={{opacity: !like ? 1 : 0}} className="far fa-heart"></i></p></div>
                         </div>
                     <div className="tags-img">
                         {img.tags.map(tag=><p key={tag} onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/tag/${tag}`)}}>#{tag} </p>)}

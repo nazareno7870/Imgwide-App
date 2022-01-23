@@ -8,9 +8,13 @@
 }
 
 .tags-img{
-    min-height: 40px;
-    text-align: left;
-    padding: 6px;
+  min-height: 40px;
+  text-align: left;
+  padding: 6px;
+  position: relative;
+  z-index: 100;
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
 }
 
 .tags-img p{
