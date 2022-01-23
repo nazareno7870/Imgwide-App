@@ -18,17 +18,28 @@
   }
 
   .wrong{
+
+    font-size: 20px;
+    padding: 5px 10px;
+    position: absolute;
+    right: 39px;
+    top: 54px;
+  }
+  .wrong i{
     transition: 0.5s;
     color: red;
-    font-size: 25px;
-    padding: 2px 10px;
   }
-  
-  .check{
+  .check i{
     transition: 0.5s;
     color: green;
-    font-size: 25px;
-    padding: 2px 10px;
+  }
+  .check{
+
+    font-size: 20px;
+    padding: 5px 10px;
+    position: absolute;
+    right: 39px;
+    top: 54px;
 
   }
   

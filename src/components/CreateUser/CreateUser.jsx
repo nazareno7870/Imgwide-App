@@ -71,30 +71,33 @@ const CreatUser = ()=>{
                     <label>Username - Minimum 6 characters</label>
                     <i className="fas fa-user"></i>
                     <input type="text" placeholder="Username" onChange={handleUsername} value={username}></input>
-                </div>
-            {username.length < 6
+                    {username.length < 6
                 ? <div className="wrong"><i class="fas fa-times-circle"></i></div>
                 : <div className="check"><i class="fas fa-check-circle"></i></div>}
+                </div>
+
             </div>
             <div className="signup-form">
                 <div className="input-form">
                     <label>Name - Minimum 4 characters</label>
                     <i class="fas fa-user-tag"></i>
                     <input type="text" placeholder="Name" onChange={handleName} value={name}></input>
-                </div>
-            {name.length < 4
+                    {name.length < 4
                 ? <div className="wrong"><i class="fas fa-times-circle"></i></div>
                 : <div className="check"><i class="fas fa-check-circle"></i></div>}
+                </div>
+
             </div>
             <div className="signup-form">
                 <div className="input-form">
                     <label>Password - Minimum 8 characters</label>
                     <i className="fas fa-key"></i>
                     <input type="password" placeholder="Password" onChange={handlePassword} value=      {password}></input>
-                </div>
-            {password.length < 8
+                    {password.length < 8
                 ? <div className="wrong"><i class="fas fa-times-circle"></i></div>
-                : <div className="check"><i class="fas fa-check-circle"></i></div>}    
+                : <div className="check"><i class="fas fa-check-circle"></i></div>}  
+                </div>
+  
             </div>
             <button className="btn-grad btn-signup">Sign Up</button>
             <p className="or" onClick={()=>navigate('/login')} style={{cursor:'pointer',marginBottom:'10px'}}>Back to Login Form</p>

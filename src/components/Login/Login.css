@@ -5,11 +5,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 500px;
     box-shadow: 1px 1px 4px #767475;
     border-radius: 6px;
     padding: 10px;
     border: 1px solid #68686852;
+    min-height: 500px;
 }
 .login-form h3{
     margin-top: 20px;
@@ -21,7 +21,7 @@
     margin-bottom: -20px;
 }
 .login-form input{
-    width: 260px;
+    width: 230px;
     margin-top: 20px;
     padding: 10px 44px;
     outline: none;
