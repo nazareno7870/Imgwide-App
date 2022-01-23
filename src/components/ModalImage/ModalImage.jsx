@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Spinner from './../Spinner/Spinner';
-import './ModalImage.css'
+import './Modalimage.css'
 
 const ModalImage = ({setmodal,modal,setimage,image}) => {
 
