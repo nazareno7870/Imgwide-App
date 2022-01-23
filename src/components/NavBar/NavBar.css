@@ -29,6 +29,51 @@ a{
 .menu-desk{
        display: none;
 }
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+}
+.search input{
+    width: 200px;
+    margin-top: 0;
+    margin-right: 14px;
+    margin-left: 40px;
+    height: 33px;
+    padding: 6px 20px;
+    outline: none;
+    border: none;
+    font-family: "IBM Plex Serif",serif;
+    font-weight: 800;
+    background-color: #ffabcc42;
+    color: #fff;
+    box-shadow: inset 1px 1px 2px #100b0b85;
+    text-align: start;
+    border-radius: 6px;
+}
+
+div.menu > ul > li > div.search >input{
+    width: 80%;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 6px 40px;
+}
+
+.search i{
+    position: absolute;
+    right: 12px;
+    color: white;
+    filter: drop-shadow(1px 1px 1px rgba(85, 85, 85, 0.604));
+    cursor: pointer;
+}
+div.menu > ul > li > div.search > i{
+    right: auto;
+    left: 14%;
+}
+
+
 @media (min-width: 768px) {
    .menu,.icon-menu{
        display: none;
@@ -89,4 +134,5 @@ a{
     -webkit-backdrop-filter: blur( 6.5px );
     border-radius: 10px;
 }
+
 }

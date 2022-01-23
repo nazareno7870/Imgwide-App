@@ -11,6 +11,7 @@ const NavBar = () => {
     const [showMenu, setshowMenu] = useState(false);
     const navigate = useNavigate();
     const {user,setuser} = useContext(userContext)
+    const [searchInput, setSearchInput] = useState('');
     useLogin()
     const handleLogout =()=>{
         window.localStorage.removeItem('username')
@@ -19,12 +20,22 @@ const NavBar = () => {
         navigate('/')
     }
 
+    const handleEnter = e=>{
+        if(e.key === 'Enter'){
+            handleSearch()
+        }
+    }
+
+    const handleSearch = (e)=>{
+        navigate(`/middle/${searchInput}`)
+        setSearchInput('')
+    }
 
     return (
     <>
         <div className="navbar">
             <div className="logo">
-                <a onClick={()=>navigate('/')}><img src={logo} alt="Logo ImgWide" /></a>
+                <a onClick={()=>{navigate('/')}}><img src={logo} alt="Logo ImgWide" /></a>
             </div>
 
             <div className="menu-desk">
@@ -37,6 +48,11 @@ const NavBar = () => {
 
              <div className="menu-desk login">
                 <ul>
+                    <div className="search">
+                        <input onKeyPress={handleEnter} autoComplete="off" type="text" name="search" id="search" value={searchInput} onChange={e=>setSearchInput(e.target.value)} />
+                        <i className="fas fa-search" onClick={handleSearch}></i>
+                    </div>
+
                     {user.username
                     ?<><div className="username-top"><p>{user.username}</p><i onClick={handleLogout} className="fas fa-door-open"></i></div></>
                     :<li onClick={()=>{navigate('/login')} }><i className="fas fa-user"></i>Login</li>}
@@ -52,6 +68,10 @@ const NavBar = () => {
         showMenu={showMenu}
         setshowMenu={setshowMenu}
         handleLogout={handleLogout}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearch={handleSearch}
+        handleEnter={handleEnter}
         />
 
 
