@@ -29,12 +29,14 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     const [deletePost, setdeletePost] = useState(false);
     const [showShare, setshowShare] = useState(false);
     const urlPost = window.location.origin + '/post/'+id
-    
+
     useEffect(() => {
         if(user.username){
             if(user.likes.includes(id) && like === false){
                 setlike(true)
             }
+        }else{
+            setlikes(false)
         }
     }, [user])
 
