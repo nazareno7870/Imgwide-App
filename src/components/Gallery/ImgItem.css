@@ -1,0 +1,68 @@
+.delete-item{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.delete-item i{
+    font-size: 24px;
+    font-weight: 500;
+    filter: drop-shadow(1px 1px 1px #af0c4a);
+    color: #ffffff;
+}
+div.my-masonry-grid > div.my-masonry-grid_column > div.modal-delete{
+    display: block;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.297);
+    z-index: 300;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 0px;
+}
+div.my-masonry-grid > div.my-masonry-grid_column > div.modal-delete>div.modal-delete-container{
+    background-color: #fff;
+    width: 50%;
+    height: 40%;
+    min-width: 270px;
+    max-width: 350px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 16px;
+}
+.modal-delete-container p{
+    font-weight: 800;
+    color: #af0c4a;
+    font-size: 20px;
+}
+.modal-delete-container button{
+    border: none;
+    color: white;
+    background-color: #14688f;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    cursor: pointer;
+    box-shadow: 0px 1px 3px black;
+    transition: 0.5s;
+    border-radius: 6px;
+    margin: 6px;
+}
+.buttons-modal-delete button:nth-child(1){
+    background-color: #52c751;
+    box-shadow: 1px 1px 1px green;
+}
+.buttons-modal-delete button:nth-child(2){
+    background-color: #c12525;
+    box-shadow: 1px 1px 1px #890909;
+}

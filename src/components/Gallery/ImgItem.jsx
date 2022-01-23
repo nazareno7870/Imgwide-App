@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Spinner from './../Spinner/Spinner';
 import userContext from '../../context/userContext';
 import axios from 'axios';
+import './ImgItem.css'
 
 const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     const navigate = useNavigate();
@@ -11,6 +12,8 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     const PATH = import.meta.env.DEV ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PROD; 
     const {user,setuser} = useContext(userContext)
     const [likes, setlikes] = useState(likesId.length);
+    const [showModalDelete, setShowModalDelete] = useState(false);
+    const [deletePost, setdeletePost] = useState(false);
 
 
     useEffect(() => {
@@ -19,9 +22,26 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
                 setlike(true)
             }
         }
-
-
     }, [])
+
+    const handleDeletePost = (e)=>{
+        let token = `Bearer ${user.token}`
+        const config = {
+            headers: {
+              Authorization: token
+            },            
+            data:{
+                userId:user.id,
+                postId:id
+            }}
+
+    
+        axios.delete(PATH+'/posts/deletepost',config).then(resp=>{
+            setdeletePost(true)
+            setShowModalDelete(false)
+        })
+
+    }
 
     const toggleLike = ()=>{
         if(user.username){
@@ -58,26 +78,42 @@ const ImgItem = ({img,handleImage,setpage,setimages,id,likesId,username}) => {
     }
 
     return (
-        <div className="img-item"  key={img.id} id={id}>
+        <>
+            <div className="img-item"  key={img.id} id={id} style={{display: deletePost && 'none'}}>
 
-            <img src={img.imgSrc}
-            alt="Image"
-            onClick={handleImage}
-            onLoad={()=>setloaded(true)}
-            />
-            {!loaded?<Spinner />:<></>}
-            <div className="bottom-image">
-                <div className="stats-post">
-                        <p><i className="fas fa-user"></i>{username}</p>
-                        <div className="likes"><p>{likes}</p><p><i style={{opacity: like ? 1 : 0}} className="fas fa-heart"></i><i onClick={toggleLike} style={{opacity: !like ? 1 : 0}} className="far fa-heart"></i></p></div>
+                <img src={img.imgSrc}
+                alt="Image"
+                onClick={handleImage}
+                onLoad={()=>setloaded(true)}
+                />
+                {!loaded?<Spinner />:<></>}
+                <div className="bottom-image">
+                    {username === user.username && <div className="delete-item" onClick={()=>setShowModalDelete(!showModalDelete)}>
+                        <i className="far fa-trash-alt"></i>
+                    </div>}
+                    <div className="stats-post">
+                            <p><i className="fas fa-user"></i>{username}</p>
+                            <div className="likes"><p>{likes}</p><p><i style={{opacity: like ? 1 : 0}} className="fas fa-heart"></i><i onClick={toggleLike} style={{opacity: !like ? 1 : 0}} className="far fa-heart"></i></p></div>
+                        </div>
+                    <div className="tags-img">
+                        {img.tags.map(tag=><p key={tag} onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/tag/${tag}`)}}>#{tag} </p>)}
                     </div>
-                <div className="tags-img">
-                    {img.tags.map(tag=><p key={tag} onClick={()=>{setpage(1);window.scroll(0,0);setimages([]);navigate(`/tag/${tag}`)}}>#{tag} </p>)}
+
                 </div>
 
             </div>
 
-        </div>
+            <div className="modal-delete" style={{display: showModalDelete ? 'block' : 'none'}}>
+                <div className="modal-delete-container">
+                    <p>Are you sure to delete this post?</p>
+                    <div className="buttons-modal-delete">
+                        <button onClick={()=>setShowModalDelete(!showModalDelete)}>NO</button>
+                        <button onClick={handleDeletePost}>YES</button>
+                    </div>
+                </div>
+   
+            </div>
+        </>
     );
 }
 

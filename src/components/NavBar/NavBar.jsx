@@ -70,8 +70,6 @@ const NavBar = () => {
         handleLogout={handleLogout}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
-        handleSearch={handleSearch}
-        handleEnter={handleEnter}
         />
 
 
