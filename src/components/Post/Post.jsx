@@ -14,8 +14,6 @@ const Post = () => {
     const {img,setimages} = useGetPost({postId})
     const [page, setpage] = useState(1);
 
-    console.log(img)
-
     const handleImage = (e)=>{
         setimage(e.target.currentSrc)
         setmodal(!modal)
