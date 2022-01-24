@@ -12,6 +12,7 @@ import Search from './components/Search/Search';
 import MiddlewareSearch from './components/Search/MiddlewareSearch';
 import Profile from './components/Profile/Profile';
 import Post from './components/Post/Post';
+import Confirm from './components/CreateUser/Confirm';
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
               <Route exact path="/gallery" element={<Layout><Gallery/></Layout>} />
               <Route exact path="/signup" element={<Layout><CreatUser/></Layout>} />
               <Route exact path="/login" element={<Layout><LoginForm/></Layout>}/>
+              <Route exact path="/confirm/*" element={<Layout><Confirm/></Layout>}/>
               <Route exact path="/tag" element={<Layout><Tags/></Layout>}/>
               <Route exact path="/tag/*" element={<Layout><TagGallery/></Layout>}/>
               <Route exact path="/post/*" element={<Layout><Post/></Layout>}/>

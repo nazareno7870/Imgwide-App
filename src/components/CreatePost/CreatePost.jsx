@@ -236,33 +236,43 @@ const CreatPost = ()=>{
 
     return(
         <>
-            <div className="tags">
-                    {tagsBtn.map(tag=>{
-                        return(<button key={tag} onClick={handleTag} className={tags.includes(tag)?'active':''}>{tag}</button>)
-                    })}
-            </div>  
-            <input type="text" id="newTag" placeholder='New Tag' value={newtag} onKeyPress={handleEnter} onChange={e=>setnewTag(e.target.value)}/>
+                {user.id && user.confirmed
+                ?<>
+                <div className="tags">
+                            {tagsBtn.map(tag=>{
+                                return(<button key={tag} onClick={handleTag} className={tags.includes(tag)?'active':''}>{tag}</button>)
+                            })}
+                    </div>  
+                    <input type="text" id="newTag" placeholder='New Tag' value={newtag} onKeyPress={handleEnter} onChange={e=>setnewTag(e.target.value)}/>
 
-            <form className="form-new-post" onSubmit={handleMiddleware}>
+                    <form className="form-new-post" onSubmit={handleMiddleware}>
 
-                {imgurl !== '' ? <img ref={img} className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
-                {showError ? <p>Enter a valid url, please.</p> : <></>}
-            { user.grade === 'admin' && <><label htmlFor="files" className="btn">Select Image</label>
-                <input
-                id="files"
-            type="file"
-            accept="image/jpg, image/jpeg, image/gif"
-            onChange={handleChange}
-            /></>}
-            <input placeholder='Write url' type="text" name="urlImage" id="urlImage" value={linkImage} onChange={e=>{setlinkImage(e.target.value);setimgurl(e.target.value)}}/>
-                <button className="btn-creatpost">Submit</button>
-            </form>
+                        {imgurl !== '' ? <img ref={img} className="new-image" src={imgurl} alt="imagen a enviar"></img> : <></>}
+                        {showError ? <p>Enter a valid url, please.</p> : <></>}
+                    { user.grade === 'admin' && <><label htmlFor="files" className="btn">Select Image</label>
+                        <input
+                        id="files"
+                    type="file"
+                    accept="image/jpg, image/jpeg, image/gif"
+                    onChange={handleChange}
+                    /></>}
+                    <input placeholder='Write url' type="text" name="urlImage" id="urlImage" value={linkImage} onChange={e=>{setlinkImage(e.target.value);setimgurl(e.target.value)}}/>
+                        <button className="btn-creatpost">Submit</button>
+                    </form>
 
-            <div className="modal-image" style={{display:loading ? 'block':'none'}}>
-        
-            <Spinner />
+                    <div className="modal-image" style={{display:loading ? 'block':'none'}}>
+                
+                    <Spinner />
 
-             </div>
+                    </div>
+                </>
+                :<>
+                    <div className="wrong-user">
+                        <p>Confirmed You Email before Create Post</p>
+                        <button onClick={()=>navigate('/')}>Go Home</button>
+                    </div>
+                </>}
+            
         </>
 
 
