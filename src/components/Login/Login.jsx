@@ -76,7 +76,7 @@ const submitLogin = async e=>{
             <input type="password" placeholder="Password" onChange={handleChangePassword} value={password}></input>
             </div>
             <button className="btn-grad">Login</button>
-            <p className="or">If you don't have an account</p>
+            <p style={{cursor:'pointer'}} onClick={()=>navigate('/resetform')} className="or">Reset Password click here!</p>
             <button className="btn-create-user" onClick={()=>navigate('/signup')}>Create User</button>
             <div style={{opacity: showError ? '1':'0'}} className="error-login">
             <p>User or Password wrongs</p>

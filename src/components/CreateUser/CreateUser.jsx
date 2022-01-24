@@ -84,7 +84,7 @@ const CreatUser = ()=>{
                 <div className="input-form">
                     <label>Email</label>
                     <i className="far fa-envelope"></i>
-                    <input type="text" placeholder="Email" onChange={handleEmail} value={email}></input>
+                    <input type='email' placeholder="Email" onChange={handleEmail} value={email}></input>
                     {regex.test(email)
                      ? <div className="check"><i class="fas fa-check-circle"></i></div>
                      : <div className="wrong"><i class="fas fa-times-circle"></i></div>

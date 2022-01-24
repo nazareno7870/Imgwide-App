@@ -13,6 +13,8 @@ import MiddlewareSearch from './components/Search/MiddlewareSearch';
 import Profile from './components/Profile/Profile';
 import Post from './components/Post/Post';
 import Confirm from './components/CreateUser/Confirm';
+import ResetPassWord from './components/CreateUser/Reset';
+import FormforReset from './components/CreateUser/FormforReset';
 
 function App() {
   
@@ -25,6 +27,8 @@ function App() {
               <Route exact path="/signup" element={<Layout><CreatUser/></Layout>} />
               <Route exact path="/login" element={<Layout><LoginForm/></Layout>}/>
               <Route exact path="/confirm/*" element={<Layout><Confirm/></Layout>}/>
+              <Route exact path="/reset/*" element={<Layout><ResetPassWord/></Layout>}/>
+              <Route exact path="/resetform" element={<Layout><FormforReset/></Layout>}/>
               <Route exact path="/tag" element={<Layout><Tags/></Layout>}/>
               <Route exact path="/tag/*" element={<Layout><TagGallery/></Layout>}/>
               <Route exact path="/post/*" element={<Layout><Post/></Layout>}/>
